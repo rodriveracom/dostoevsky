@@ -1,0 +1,34 @@
+$ scripts/conformance.py --engine go=GO
+PASS size-limit [segmented, go then go]
+PASS torn-tail [legacy, go then go]
+PASS torn-tail [segmented, go then go]
+19 passed, 0 failed
+exit 0
+
+$ scripts/conformance.py --engine go=GO --engine rust=RUST
+PASS retention-twice-then-reopen [legacy, go then go]
+FAIL retention-twice-then-reopen [legacy, go then rust] - step 12 (open): other: dostoevsky: Open is not ported yet (row 6)
+FAIL retention-twice-then-reopen [legacy, rust then go] - step 1 (open): other: dostoevsky: Open is not ported yet (row 6)
+FAIL retention-twice-then-reopen [legacy, rust then rust] - step 1 (open): other: dostoevsky: Open is not ported yet (row 6)
+PASS retention-twice-then-reopen [segmented, go then go]
+FAIL retention-twice-then-reopen [segmented, go then rust] - step 12 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+FAIL retention-twice-then-reopen [segmented, rust then go] - step 1 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+FAIL retention-twice-then-reopen [segmented, rust then rust] - step 1 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+PASS size-limit [legacy, go then go]
+FAIL size-limit [legacy, go then rust] - step 8 (open): other: dostoevsky: Open is not ported yet (row 6)
+FAIL size-limit [legacy, rust then go] - step 1 (open): other: dostoevsky: Open is not ported yet (row 6)
+FAIL size-limit [legacy, rust then rust] - step 1 (open): other: dostoevsky: Open is not ported yet (row 6)
+PASS size-limit [segmented, go then go]
+FAIL size-limit [segmented, go then rust] - step 8 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+FAIL size-limit [segmented, rust then go] - step 1 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+FAIL size-limit [segmented, rust then rust] - step 1 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+PASS torn-tail [legacy, go then go]
+FAIL torn-tail [legacy, go then rust] - step 9 (open): other: dostoevsky: Open is not ported yet (row 6)
+FAIL torn-tail [legacy, rust then go] - step 1 (open): other: dostoevsky: Open is not ported yet (row 6)
+FAIL torn-tail [legacy, rust then rust] - step 1 (open): other: dostoevsky: Open is not ported yet (row 6)
+PASS torn-tail [segmented, go then go]
+FAIL torn-tail [segmented, go then rust] - step 9 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+FAIL torn-tail [segmented, rust then go] - step 1 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+FAIL torn-tail [segmented, rust then rust] - step 1 (open): other: dostoevsky: OpenSegmented is not ported yet (row 5)
+21 passed, 55 failed
+exit 1

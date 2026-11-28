@@ -1,0 +1,43 @@
+$ scripts/differential.py --engine go=GO --engine rust=RUST   (the Go driver on main has no fix_inputs yet)
+json: unknown field "start"
+BROKEN  backup-and-migrate [legacy]: the go driver stopped answering at request 0 (fix_inputs), status 1
+json: unknown field "start"
+BROKEN  backup-and-migrate [segmented]: the go driver stopped answering at request 0 (fix_inputs), status 1
+json: unknown field "start"
+BROKEN  publish-read-commit [legacy]: the go driver stopped answering at request 0 (fix_inputs), status 1
+json: unknown field "start"
+BROKEN  publish-read-commit [segmented]: the go driver stopped answering at request 0 (fix_inputs), status 1
+json: unknown field "start"
+BROKEN  retention [legacy]: the go driver stopped answering at request 0 (fix_inputs), status 1
+json: unknown field "start"
+BROKEN  retention [segmented]: the go driver stopped answering at request 0 (fix_inputs), status 1
+6 comparisons: 0 different, 6 broken
+exit 2
+
+$ scripts/differential.py --engine go=GO --engine rust=RUST --without-seam --trace retention
+DIFFER  retention [segmented]: rust against go, 27 differences
+        reply 0 (open): go {"ok":true,"result":{"truncated_at":0,"truncated_bytes":0}} | rust {"ok":false,"error":"other","message":"dostoevsky: OpenSegmented is not ported yet (row 5)"}
+        reply 1 (publish_batch): go {"ok":true,"result":{"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"cjA=","id":"r0","time":"1795868630993298666"},{"topic":"events","pa | rust {"ok":false,"error":"other
+        reply 2 (commit_batch): go {"ok":true} | rust {"ok":false,"error":"other","message":"dost-conform: no node is open"}
+        reply 3 (retain): go {"ok":false,"error":"conflict","message":"partition {events 0} has a lagging consumer: checkpoint or message ID conflict"} | rust {"ok":false,"error":"other","message":"dost-conform: no node is open"}
+        reply 4 (retain): go {"ok":true} | rust {"ok":false,"error":"other","message":"dost-conform: no node is open"}
+        reply 5 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":8,"key":"","value":"cjg=","id":"r8","time":"1795868630998142898"}} | rust {"ok":false,"error":"other","message":"dost-conform: no node is o
+        reply 6 (retain): go {"ok":true} | rust {"ok":false,"error":"other","message":"dost-conform: no node is open"}
+        reply 7 (read): go {"ok":false,"error":"expired","message":"offset expired by retention"} | rust {"ok":false,"error":"other","message":"dost-conform: no node is open"}
+        reply 8 (read_batch): go {"ok":true,"result":{"next":9,"records":[{"topic":"events","partition":0,"offset":4,"key":"","value":"cjQ=","id":"r4","time":"1795868630993306904"},{"topic":"ev | rust {"ok":false,"error":"other","
+        reply 9 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":9,"key":"","value":"cjAgYWdhaW4=","id":"r0","time":"1795868631001975400"}} | rust {"ok":false,"error":"other","message":"dost-conform: no n
+        reply 10 (close): go {"ok":true} | rust {"ok":false,"error":"other","message":"dost-conform: no node is open"}
+        reply 11 (open): go {"ok":true,"result":{"truncated_at":0,"truncated_bytes":0}} | rust {"ok":false,"error":"other","message":"dostoevsky: OpenSegmented is not ported yet (row 5)"}
+        ... and 15 more
+1 comparisons: 1 different, 0 broken
+exit 1
+
+$ scripts/differential.py --engine rust=RUST --engine rust-again=RUST
+same    backup-and-migrate [legacy]: rust-again against rust: 16 replies (16 identical as bytes), 0 files, 0 bytes
+same    backup-and-migrate [segmented]: rust-again against rust: 11 replies (11 identical as bytes), 0 files, 0 bytes
+same    publish-read-commit [legacy]: rust-again against rust: 24 replies (24 identical as bytes), 0 files, 0 bytes
+same    publish-read-commit [segmented]: rust-again against rust: 25 replies (25 identical as bytes), 0 files, 0 bytes
+same    retention [legacy]: rust-again against rust: 15 replies (15 identical as bytes), 0 files, 0 bytes
+same    retention [segmented]: rust-again against rust: 15 replies (15 identical as bytes), 0 files, 0 bytes
+6 comparisons: 0 different, 0 broken
+exit 0

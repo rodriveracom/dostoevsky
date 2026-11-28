@@ -1,0 +1,5 @@
+# blocks 0 to 3 of the fixed random source for the seed "seed": SHA-256(seed || counter as 8 bytes, big-endian); written with Python's hashlib
+1a30d3c0635d49b5a0171067701f1cac41ceaa184e3d080e36335b3eb48db685
+72e4f9aecea933bf841f286eb62fca5c4438be2f21c900141f792cb9c4cfd592
+e949d45204b2eee8b18847966b9a32ecdba039d11ce520d7f79d2d3c83bc323c
+54c897dc8be10d56e08e3aa4e16fc586008c13d257d33ace0d45c0797f9e71f9

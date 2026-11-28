@@ -1,0 +1,110 @@
+[
+ {
+  "trace": "backup-and-migrate",
+  "format": "legacy",
+  "reference": "go",
+  "engine": "go-again",
+  "seam": false,
+  "requests": 16,
+  "replies_equal_ignoring_message": 12,
+  "replies_identical_bytes": 12,
+  "paths": 17,
+  "files": 13,
+  "file_bytes": 1944,
+  "tree_sha256": {
+   "go": "8069bdc8ef5d401a83326e335831a15f8c9b90bd64227e0455b3b4d9358a5a6c",
+   "go-again": "4c60503e6367da49656f19ff8495b13ac09a45ceb21c9b17dbefd20893c8d10d"
+  },
+  "differences": 9
+ },
+ {
+  "trace": "backup-and-migrate",
+  "format": "segmented",
+  "reference": "go",
+  "engine": "go-again",
+  "seam": false,
+  "requests": 11,
+  "replies_equal_ignoring_message": 9,
+  "replies_identical_bytes": 9,
+  "paths": 9,
+  "files": 6,
+  "file_bytes": 905,
+  "tree_sha256": {
+   "go": "def9bca04612cae4333bd872dd13471486b2f84405ffdd5efe14eea385ead722",
+   "go-again": "46b6248fc7a509807b104442f12c49ebabff5a7c88b33fe75f4092e9bdfa53e6"
+  },
+  "differences": 4
+ },
+ {
+  "trace": "publish-read-commit",
+  "format": "legacy",
+  "reference": "go",
+  "engine": "go-again",
+  "seam": false,
+  "requests": 24,
+  "replies_equal_ignoring_message": 14,
+  "replies_identical_bytes": 14,
+  "paths": 3,
+  "files": 2,
+  "file_bytes": 1515,
+  "tree_sha256": {
+   "go": "c9dff9a85d41265a302cd1460141a5f70108cf4cf7f3f31b1841f213320aa287",
+   "go-again": "9b51284c31148b71ed17d9babb9c85c59e02a30f8c1798a47793234f7d341110"
+  },
+  "differences": 11
+ },
+ {
+  "trace": "publish-read-commit",
+  "format": "segmented",
+  "reference": "go",
+  "engine": "go-again",
+  "seam": false,
+  "requests": 25,
+  "replies_equal_ignoring_message": 15,
+  "replies_identical_bytes": 15,
+  "paths": 6,
+  "files": 4,
+  "file_bytes": 773,
+  "tree_sha256": {
+   "go": "ee1dc6040e3c8f9ff35d5664515aa28e8510164706963639a99ff0ea626c92df",
+   "go-again": "4492e0c456d308e921f8ad2ccb21d0f04cf35da559a3ceff640c3fe64b0adde5"
+  },
+  "differences": 11
+ },
+ {
+  "trace": "retention",
+  "format": "legacy",
+  "reference": "go",
+  "engine": "go-again",
+  "seam": false,
+  "requests": 15,
+  "replies_equal_ignoring_message": 10,
+  "replies_identical_bytes": 10,
+  "paths": 3,
+  "files": 2,
+  "file_bytes": 1069,
+  "tree_sha256": {
+   "go": "27e040de42dbecbf84e1324b75f94e2e459a9d7e067fb50a3cbb314666f1f5f2",
+   "go-again": "fcbc49641c5077abc5d19febd8aa373d583df08a2e72ff591a87a4c5c9748d8d"
+  },
+  "differences": 6
+ },
+ {
+  "trace": "retention",
+  "format": "segmented",
+  "reference": "go",
+  "engine": "go-again",
+  "seam": false,
+  "requests": 15,
+  "replies_equal_ignoring_message": 10,
+  "replies_identical_bytes": 10,
+  "paths": 12,
+  "files": 10,
+  "file_bytes": 1708,
+  "tree_sha256": {
+   "go": "f5a4eb7e4aab85a22bbc0102bff5aec4360e8a67fb8423b1498423b2b41bf307",
+   "go-again": "05021440141014578347ef66e7a055b1394866fe1d61514eb00d0d7f7a3d3dac"
+  },
+  "differences": 11
+ }
+]

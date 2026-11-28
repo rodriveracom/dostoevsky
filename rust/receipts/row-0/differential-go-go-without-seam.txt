@@ -1,0 +1,61 @@
+$ scripts/differential.py --engine go=GO --engine go-again=GO --without-seam
+DIFFER  backup-and-migrate [legacy]: go-again against go, 9 differences
+        reply 1 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":0,"key":"","value":"b25l","id":"a","time":"1795868630714100787"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":0
+        reply 2 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":1,"key":"k","value":"dHdv","id":"","time":"1795868630714443127"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":1
+        reply 10 (read_batch): go {"ok":true,"result":{"next":2,"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"b25l","id":"a","time":"1795868630714100787"},{"topic":"eve | go-again {"ok":true,"result":{"ne
+        reply 14 (read_batch): go {"ok":true,"result":{"next":2,"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"b25l","id":"a","time":"1795868630714100787"},{"topic":"eve | go-again {"ok":true,"result":{"ne
+        tree: copy/journal.v1 differs at byte 91 (go has 462 bytes, go-again has 462)
+        tree: moved/segments/seg-0000000000000002.bloom differs at byte 32 (go has 44 bytes, go-again has 44)
+        tree: moved/segments/seg-0000000000000002.idx differs at byte 20 (go has 144 bytes, go-again has 144)
+        tree: moved/segments/seg-0000000000000002.log differs at byte 226 (go has 300 bytes, go-again has 300)
+        tree: store/journal.v1 differs at byte 91 (go has 462 bytes, go-again has 462)
+DIFFER  backup-and-migrate [segmented]: go-again against go, 4 differences
+        reply 1 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":0,"key":"","value":"b25l","id":"a","time":"1795868630749698107"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":0
+        reply 2 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":1,"key":"k","value":"dHdv","id":"","time":"1795868630750022397"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":1
+        tree: copy/journal.v1 differs at byte 280 (go has 556 bytes, go-again has 555)
+        tree: store/segments/seg-0000000000000001.log differs at byte 192 (go has 305 bytes, go-again has 305)
+DIFFER  publish-read-commit [legacy]: go-again against go, 11 differences
+        reply 1 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630769554609"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset
+        reply 2 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":1,"key":"k1","value":"c2Vjb25k","id":"id-1","time":"1795868630769909910"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"
+        reply 4 (publish): go {"ok":true,"result":{"topic":"orders","partition":1,"offset":0,"key":"customer-7","value":"b3JkZXIgPDE+ICYgw6k=","id":"order-1","time":"1795868630770180473"}} | go-again {"ok":true,"result":{"topic":"
+        reply 5 (publish): go {"ok":true,"result":{"topic":"orders","partition":0,"offset":0,"key":"customer-8","value":"","id":"","time":"1795868630770353847"}} | go-again {"ok":true,"result":{"topic":"orders","partition":0,"offs
+        reply 6 (publish_batch): go {"ok":true,"result":{"records":[{"topic":"events","partition":0,"offset":2,"key":"","value":"YjE=","id":"batch-1","time":"1795868630770531800"},{"topic":"orders | go-again {"ok":true,"result":{"
+        reply 8 (read): go {"ok":true,"result":{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630769554609"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":0
+        reply 10 (read_batch): go {"ok":true,"result":{"next":4,"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630769554609"},{"topic":" | go-again {"ok":true,"result":{"ne
+        reply 11 (read_batch): go {"ok":true,"result":{"next":2,"records":[{"topic":"orders","partition":1,"offset":0,"key":"customer-7","value":"b3JkZXIgPDE+ICYgw6k=","id":"order-1","time":"179 | go-again {"ok":true,"result":{"ne
+        reply 21 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":4,"key":"","value":"YWZ0ZXIgcmVvcGVu","id":"id-2","time":"1795868630772533670"}} | go-again {"ok":true,"result":{"topic":"events","partiti
+        reply 22 (read_batch): go {"ok":true,"result":{"next":5,"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630769554609"},{"topic":" | go-again {"ok":true,"result":{"ne
+        tree: store/journal.v1 differs at byte 102 (go has 1515 bytes, go-again has 1516)
+DIFFER  publish-read-commit [segmented]: go-again against go, 11 differences
+        reply 1 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630789438225"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset
+        reply 2 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":1,"key":"k1","value":"c2Vjb25k","id":"id-1","time":"1795868630789644201"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"
+        reply 4 (publish): go {"ok":true,"result":{"topic":"orders","partition":1,"offset":0,"key":"customer-7","value":"b3JkZXIgPDE+ICYgw6k=","id":"order-1","time":"1795868630789881119"}} | go-again {"ok":true,"result":{"topic":"
+        reply 5 (publish): go {"ok":true,"result":{"topic":"orders","partition":0,"offset":0,"key":"customer-8","value":"","id":"","time":"1795868630790037182"}} | go-again {"ok":true,"result":{"topic":"orders","partition":0,"offs
+        reply 6 (publish_batch): go {"ok":true,"result":{"records":[{"topic":"events","partition":0,"offset":2,"key":"","value":"YjE=","id":"batch-1","time":"1795868630790236017"},{"topic":"orders | go-again {"ok":true,"result":{"
+        reply 8 (read): go {"ok":true,"result":{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630789438225"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":0
+        reply 10 (read_batch): go {"ok":true,"result":{"next":4,"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630789438225"},{"topic":" | go-again {"ok":true,"result":{"ne
+        reply 11 (read_batch): go {"ok":true,"result":{"next":2,"records":[{"topic":"orders","partition":1,"offset":0,"key":"customer-7","value":"b3JkZXIgPDE+ICYgw6k=","id":"order-1","time":"179 | go-again {"ok":true,"result":{"ne
+        reply 21 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":4,"key":"","value":"YWZ0ZXIgcmVvcGVu","id":"id-2","time":"1795868630791972856"}} | go-again {"ok":true,"result":{"topic":"events","partiti
+        reply 22 (read_batch): go {"ok":true,"result":{"next":5,"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"Zmlyc3Q=","id":"","time":"1795868630789438225"},{"topic":" | go-again {"ok":true,"result":{"ne
+        tree: store/segments/seg-0000000000000001.log differs at byte 203 (go has 729 bytes, go-again has 729)
+DIFFER  retention [legacy]: go-again against go, 6 differences
+        reply 1 (publish_batch): go {"ok":true,"result":{"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"cjA=","id":"r0","time":"1795868630810352305"},{"topic":"events","pa | go-again {"ok":true,"result":{"
+        reply 5 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":8,"key":"","value":"cjg=","id":"r8","time":"1795868630812092081"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":
+        reply 8 (read_batch): go {"ok":true,"result":{"next":9,"records":[{"topic":"events","partition":0,"offset":4,"key":"","value":"cjQ=","id":"r4","time":"1795868630810379782"},{"topic":"ev | go-again {"ok":true,"result":{"nex
+        reply 9 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":9,"key":"","value":"cjAgYWdhaW4=","id":"r0","time":"1795868630813567907"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"
+        reply 12 (read_batch): go {"ok":true,"result":{"next":10,"records":[{"topic":"events","partition":0,"offset":4,"key":"","value":"cjQ=","id":"r4","time":"1795868630810379782"},{"topic":"e | go-again {"ok":true,"result":{"ne
+        tree: store/journal.v1 differs at byte 203 (go has 1069 bytes, go-again has 1069)
+DIFFER  retention [segmented]: go-again against go, 11 differences
+        reply 1 (publish_batch): go {"ok":true,"result":{"records":[{"topic":"events","partition":0,"offset":0,"key":"","value":"cjA=","id":"r0","time":"1795868630834006567"},{"topic":"events","pa | go-again {"ok":true,"result":{"
+        reply 5 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":8,"key":"","value":"cjg=","id":"r8","time":"1795868630837102605"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"offset":
+        reply 8 (read_batch): go {"ok":true,"result":{"next":9,"records":[{"topic":"events","partition":0,"offset":4,"key":"","value":"cjQ=","id":"r4","time":"1795868630834019557"},{"topic":"ev | go-again {"ok":true,"result":{"nex
+        reply 9 (publish): go {"ok":true,"result":{"topic":"events","partition":0,"offset":9,"key":"","value":"cjAgYWdhaW4=","id":"r0","time":"1795868630839660450"}} | go-again {"ok":true,"result":{"topic":"events","partition":0,"
+        reply 12 (read_batch): go {"ok":true,"result":{"next":10,"records":[{"topic":"events","partition":0,"offset":4,"key":"","value":"cjQ=","id":"r4","time":"1795868630834019557"},{"topic":"e | go-again {"ok":true,"result":{"ne
+        tree: store/segments/seg-0000000000000001.idx differs at byte 20 (go has 256 bytes, go-again has 256)
+        tree: store/segments/seg-0000000000000001.log differs at byte 192 (go has 560 bytes, go-again has 560)
+        tree: store/segments/seg-0000000000000002.bloom differs at byte 32 (go has 44 bytes, go-again has 44)
+        tree: store/segments/seg-0000000000000002.idx differs at byte 20 (go has 144 bytes, go-again has 144)
+        tree: store/segments/seg-0000000000000002.log differs at byte 259 (go has 291 bytes, go-again has 291)
+        tree: store/segments/seg-0000000000000003.log differs at byte 259 (go has 297 bytes, go-again has 297)
+6 comparisons: 6 different, 0 broken
+exit 1

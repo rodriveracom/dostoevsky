@@ -1,0 +1,52 @@
+$ cargo fmt --check
+exit 0
+
+$ cargo clippy --offline --all-targets -- -D warnings
+    Checking dostoevsky-workflow v0.0.0 (rust/crates/dostoevsky-workflow)
+    Checking dostoevsky-server v0.0.0 (rust/crates/dostoevsky-server)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.73s
+exit 0
+
+$ cargo test --offline
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_cli-207acd33ad6f72c4)
+test conform::tests::replies_are_the_go_driver_s_bytes ... ok
+test conform::tests::requests_decode_as_in_go ... ok
+test conform::tests::serves_until_end_of_input_and_keeps_the_order_of_checks ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/bin/dost-conform.rs (../.dev/rust-target/debug/deps/dost_conform-5cc8cf6dfc664f1e)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_core-06c148fd9595bc4a)
+test errors::tests::the_first_kind_in_the_driver_order_is_reported ... ok
+test seam::tests::the_contract ... ok
+test sha256::tests::lengths_around_the_block_size ... ok
+test sha256::tests::standard_vectors ... ok
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_format-13b08d9b5e767a1b)
+test base64::tests::known_vectors_round_trip ... ok
+test base64::tests::refuses_what_go_refuses_and_skips_newlines ... ok
+test gojson::tests::a_stream_waits_for_the_rest ... ok
+test gojson::tests::invalid_utf8_is_written_raw_and_both_forms_read_the_same ... ok
+test gojson::tests::reads_what_go_reads ... ok
+test gojson::tests::refuses_what_go_refuses ... ok
+test gojson::tests::reads_and_refuses_exactly_what_the_go_decoder_does ... ok
+test gojson::tests::strings_match_the_go_encoder ... ok
+test gojson::tests::writes_values_as_go_does ... ok
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_node-25855705d1c92f69)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_py-abd0fe3427897a1c)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_server-c0b8abe05434eb26)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_wire-0c89ae4d04bc2f09)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running unittests src/lib.rs (../.dev/rust-target/debug/deps/dostoevsky_workflow-c31dd7da2ee4ef3e)
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
