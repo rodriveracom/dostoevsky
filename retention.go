@@ -8,13 +8,15 @@ import (
 	"os"
 	"path/filepath"
 	"syscall"
+
+	"github.com/rodriveracom/dostoevsky/internal/seam"
 )
 
 // retentionFault is a test hook called before each durable step of Retain:
 // "write" (each frame written to the temp file), "sync" (temp file), "rename",
 // "dirsync" and "truncate" (releasing the replaced file). A non-nil result is
 // returned as if the step had failed.
-var retentionFault = func(stage string) error { return nil }
+var retentionFault = func(stage string) error { return seam.At("retention." + stage) }
 
 // seedFrameBudget keeps a seed frame well under maxFrame (state is base64 in JSON).
 const seedFrameBudget = 2 << 20

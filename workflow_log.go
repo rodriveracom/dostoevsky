@@ -351,11 +351,21 @@ func (l *WorkflowLog) PublishBatch(ctx context.Context, items []Publication) ([]
 	if len(items) == 0 || len(items) > 1024 {
 		return nil, ErrInvalid
 	}
+	if e := seam.At("workflow.before_append"); e != nil {
+		n.segments.failed = e
+		return nil, e
+	}
 	r, e := n.publishBatchLocked(ctx, items)
 	if e != nil {
 		return nil, e
 	}
-	if e = l.seal(); e != nil {
+	if e = seam.At("workflow.after_segment_sync_before_witness"); e == nil {
+		e = l.seal()
+	}
+	if e == nil {
+		e = seam.At("workflow.after_witness_before_reply")
+	}
+	if e != nil {
 		n.segments.failed = e
 		return nil, e
 	}

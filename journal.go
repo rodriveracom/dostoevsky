@@ -12,6 +12,8 @@ import (
 	"path/filepath"
 	"slices"
 	"syscall"
+
+	"github.com/rodriveracom/dostoevsky/internal/seam"
 )
 
 // ErrIncompleteBackup is returned by Open for a directory that holds .journal.tmp
@@ -230,7 +232,13 @@ func (j *journal) writeFrames(frames []byte) error {
 	if j.failed != nil {
 		return j.failed
 	}
-	_, err := j.file.WriteAt(frames, j.end)
+	err := seam.At("journal.write")
+	if err == nil {
+		_, err = j.file.WriteAt(frames, j.end)
+	}
+	if err == nil {
+		err = seam.At("journal.sync")
+	}
 	if err == nil {
 		if j.synced {
 			err = syncData(j.file)

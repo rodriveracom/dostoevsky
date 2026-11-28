@@ -623,6 +623,9 @@ func writeSegmentRange(l *segLog, first uint64) error {
 		err = e
 	}
 	if err == nil {
+		err = seam.At("range.publish")
+	}
+	if err == nil {
 		err = os.Rename(tmp, filepath.Join(l.dir, "RANGE"))
 	}
 	if err == nil {

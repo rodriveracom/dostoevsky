@@ -8,6 +8,8 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+
+	"github.com/rodriveracom/dostoevsky/internal/seam"
 )
 
 // ErrBackupNotDurable reports that a backup is complete and readable but its
@@ -63,6 +65,9 @@ func publishSnapshot(dir string, write func(string) error) error {
 			os.RemoveAll(stage)
 		}
 	}()
+	if err = seam.At("backup.write"); err != nil {
+		return err
+	}
 	if err = write(stage); err != nil {
 		return err
 	}
@@ -74,11 +79,17 @@ func publishSnapshot(dir string, write func(string) error) error {
 	} else if !errors.Is(err, os.ErrNotExist) {
 		return err
 	}
+	if err = seam.At("backup.rename"); err != nil {
+		return err
+	}
 	if err = os.Rename(stage, dir); err != nil {
 		return err
 	}
 	renamed = true
-	if err = syncDir(parent); err != nil {
+	if err = seam.At("backup.syncparent"); err == nil {
+		err = syncDir(parent)
+	}
+	if err != nil {
 		return fmt.Errorf("%w: %v", ErrBackupNotDurable, err)
 	}
 	return nil
@@ -137,6 +148,9 @@ func (n *Node) writeBackup(ctx context.Context, stage string) error {
 
 // syncDir is a hook so tests can see which directories are synced.
 var syncDir = func(path string) error {
+	if err := seam.At("dirsync"); err != nil {
+		return err
+	}
 	d, err := os.Open(path)
 	if err != nil {
 		return err

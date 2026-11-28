@@ -4,6 +4,10 @@ Dostoevsky is an MIT-licensed, pure-Go library for durable messaging and stream 
 
 **Repository status.** The complete 0.2.3 source was merged into this repository on **22 November 2026 at 00:28:38 UTC** (PR #1, before the move to `rodriveracom/dostoevsky`). The versions below follow the six source packages delivered during development.
 
+## Unreleased — named failure and kill points
+
+- Added internal, test-only points in the write paths where a test can inject a failure or kill the process. Applications cannot reach them; unarmed they do nothing.
+
 ## Unreleased — test seam for stored inputs
 
 - The clock and randomness that reach stored bytes now go through an internal package so that tests can fix them. Applications cannot reach it, and unset it is the standard library.

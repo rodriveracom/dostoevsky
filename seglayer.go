@@ -13,6 +13,8 @@ import (
 	"sort"
 	"strings"
 	"sync"
+
+	"github.com/rodriveracom/dostoevsky/internal/seam"
 )
 
 // Each append-only segment starts with a header and checkpoint. Publication uses a synced
@@ -239,9 +241,24 @@ func (s *segment) append(frames []byte) error {
 	if err != nil {
 		return fmt.Errorf("segment write: %w", err)
 	}
+	if seam.Armed("workflow.mid_append") {
+		// Leave the group half written, as an interrupted write would.
+		if _, err = s.f.WriteAt(frames[:len(frames)/2], s.end); err == nil {
+			err = seam.At("workflow.mid_append")
+		}
+		if err != nil {
+			return fmt.Errorf("segment write: %w", err)
+		}
+	}
+	if err = seam.At("segment.write"); err != nil {
+		return fmt.Errorf("segment write: %w", err)
+	}
 	n, err := s.f.WriteAt(frames, s.end)
 	if err == nil && n != len(frames) {
 		err = io.ErrShortWrite
+	}
+	if err == nil {
+		err = seam.At("segment.sync")
 	}
 	if err == nil {
 		err = s.f.SyncData()
